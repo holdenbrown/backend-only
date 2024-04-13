@@ -7,17 +7,18 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use('/user', authRoutes);
 
-const mongoURI = process.env.MONGO_URI;;
+const mongoURI = process.env.MONGO_URI;
+const port = process.env.PORT || 3000;
+
 
 mongoose.connect(mongoURI)
 .then(() => {
   console.log('MongoDB Connected');
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on port ${PORT}`);
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on port ${port}`);
   });
 })
 .catch(err => {
