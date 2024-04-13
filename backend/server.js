@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes'); 
+require('dotenv').config();
+
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use('/user', authRoutes);
 
-const mongoURI = 'mongodb+srv://user:Nurture@nurture.9lc0wop.mongodb.net/';
+const mongoURI = process.env.MONGO_URI;;
 
 mongoose.connect(mongoURI)
 .then(() => {
